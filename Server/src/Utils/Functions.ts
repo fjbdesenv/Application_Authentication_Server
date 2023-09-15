@@ -1,7 +1,8 @@
 import { NotField, UnauthorizedKey } from "./Responses";
-import { Collections } from "./Collections";
-import { Db } from "mongodb";
 import { NextFunction, Response } from "express";
+import { Collections } from "./Collections";
+import { HmacMD5, HmacSHA1 } from "crypto-js";
+import { Db } from "mongodb";
 
 export const validacao = (collection: any, campos: Array<string>, res: Response) => {
     for (let posicao = 0; posicao < campos.length; posicao++) {
@@ -50,5 +51,13 @@ export const checkKey = (req: any, res: Response, next: NextFunction) => {
 
 };
 
+export const criptografarSenha = (senha: string | undefined) => {
+    if (senha) {
+        const CRYPTO_KEY: string = process.env.CRYPTO_KEY || '';
+        return HmacMD5(HmacSHA1(senha, CRYPTO_KEY), CRYPTO_KEY).toString();
+    } else {
+        throw new Error("Password is undefined in 'criptografarSenha'.")
+    }
+}
 
-
+export const dataBR = () => new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });

@@ -4,7 +4,7 @@ export const Collections = {
         fields: ["codigo", "aplicacao", "usuario", "nivel"]
     },
     aplicacao: {
-        name: "aplicacao",
+        name: "aplicacoes",
         fields: ["nome", "email", "senha"]
     },
     nivel: {

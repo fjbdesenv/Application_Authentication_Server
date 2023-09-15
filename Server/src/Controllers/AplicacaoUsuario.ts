@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { conexao, desconectar } from "../Conf/dataBase";
 import { Delete, NotFound, Update } from "../Utils/Responses";
-import { autoIncrement, validacao } from "../Utils/Functions";
+import { autoIncrement, criptografarSenha, dataBR, validacao } from "../Utils/Functions";
 import { Collections } from "../Utils/Collections";
 import { Usuario } from "../Interfaces";
 import { config } from "dotenv";
@@ -51,10 +51,11 @@ export const Controller = {
             const form: ClassRegister = req.body;
             const { codigoApp } = req.params;
             const codigo = await autoIncrement(db, AUTOINC_NAME);
-            const data = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
-
+            const data = dataBR();
+            
             if (!validacao(form, FIELDS, res)) return;
-
+            
+            form.senha = criptografarSenha(form.senha);
             form.data_criacao = data;
             form.data_atualizacao = data;
 
@@ -76,7 +77,8 @@ export const Controller = {
 
             if (!validacao(form, FIELDS, res)) return;
 
-            form.data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+            form.senha = criptografarSenha(form.senha);
+            form.data_atualizacao = dataBR();
 
             const resultado = await db.collection(COLLECTION.name).findOne({ codigo: codigoApp });
 
@@ -106,7 +108,8 @@ export const Controller = {
             const form: ClassRegister = req.body;
             const { codigoApp, codigoUser } = req.params;
 
-            form.data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+            if(form.senha) form.senha = criptografarSenha(form.senha);
+            form.data_atualizacao = dataBR();
 
             const resultado = await db.collection(COLLECTION.name).findOne({ codigo: codigoApp });
 

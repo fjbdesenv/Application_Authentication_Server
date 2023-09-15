@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { conexao, desconectar } from "../Conf/dataBase";
 import { Delete, NotFound, Update } from "../Utils/Responses";
-import { autoIncrement, validacao } from "../Utils/Functions";
+import { autoIncrement, criptografarSenha, dataBR, validacao } from "../Utils/Functions";
 import { Collections } from "../Utils/Collections";
 import { Aplicacao } from "../Interfaces";
 import { config } from "dotenv";
@@ -31,7 +31,7 @@ export const Controller = {
 
             const resultado = await db.collection(COLLECTION.name).findOne({ codigo });
             desconectar(client);
-            
+
             resultado?._id ? res.json(resultado) : NotFound(res);
 
         } catch (error) { next(error) };
@@ -42,10 +42,11 @@ export const Controller = {
             const { client, db } = await conexao();
             const form: ClassRegister = req.body;
             const codigo = await autoIncrement(db, AUTOINC_NAME);
-            const data = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+            const data = dataBR();
 
             if (!validacao(form, COLLECTION.fields, res)) return;
-            
+
+            form.senha = criptografarSenha(form.senha);
             form.data_criacao = data;
             form.data_atualizacao = data;
 
@@ -66,7 +67,8 @@ export const Controller = {
             const codigo: string = req.params.codigo;
 
             if (!validacao(form, COLLECTION.fields, res)) return;
-            form.data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+            if (form.senha) form.senha = criptografarSenha(form.senha);
+            form.data_atualizacao = dataBR();
 
             const resultado = await db.collection(COLLECTION.name).findOneAndUpdate(
                 { codigo },
@@ -84,8 +86,9 @@ export const Controller = {
             const { client, db } = await conexao();
             const form: ClassRegister = req.body;
             const codigo: string = req.params.codigo;
-            
-            form.data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+
+            if (form.senha) form.senha = criptografarSenha(form.senha);
+            form.data_atualizacao = dataBR();
 
             const resultado = await db.collection(COLLECTION.name).findOneAndUpdate(
                 { codigo },
@@ -106,7 +109,7 @@ export const Controller = {
             desconectar(client);
 
             resultado?.value ? Delete(res) : NotFound(res);
-            
+
         } catch (error) { next(error) }
     }
 };

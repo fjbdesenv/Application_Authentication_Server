@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { conexao, desconectar } from "../Conf/dataBase";
 import { Delete, NotFound, Update } from "../Utils/Responses";
-import { autoIncrement, validacao } from "../Utils/Functions";
+import { autoIncrement, dataBR, validacao } from "../Utils/Functions";
 import { Collections } from "../Utils/Collections";
 import { Nivel } from "../Interfaces";
 import { config } from "dotenv";
@@ -66,7 +66,7 @@ export const Controller = {
             const { client, db } = await conexao();
             const form: ClassRegister = req.body;
             const codigo = await autoIncrement(db, AUTOINC_NAME);
-            const data = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+            const data = dataBR();
 
             if (!validacao(form, FIELDS, res)) return;
             
@@ -91,7 +91,7 @@ export const Controller = {
 
             if (!validacao(form, FIELDS, res)) return;
 
-            form.data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+            form.data_atualizacao = dataBR();
 
             const resultado = await db.collection(COLLECTION.name).findOneAndUpdate(
                 { codigo },
@@ -110,7 +110,7 @@ export const Controller = {
             const form: ClassRegister = req.body;
             const codigo = req.params.codigo;
 
-            form.data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+            form.data_atualizacao = dataBR();
 
             const resultado = await db.collection(COLLECTION.name).findOneAndUpdate(
                 { codigo },

@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import { conexao, desconectar } from "../Conf/dataBase";
 import { Secret, sign } from "jsonwebtoken";
 import { Collections } from "../Utils/Collections";
-import { validacao } from "../Utils/Functions";
+import { criptografarSenha, dataBR, validacao } from "../Utils/Functions";
 import { getToken } from "../Utils/JWT";
 import { Auth } from "../Interfaces";
 import { config } from "dotenv";
@@ -21,7 +21,8 @@ export const Controller = {
         try {
             const { client, db } = await conexao();
             const form: ClassRegister = req.body;
-            const { email, senha } = form;
+            const senha = criptografarSenha(form.senha);
+            const email = form.email;
             const token = getToken(req);
 
             if (!validacao(form, FIELDS, res)) return;
@@ -35,7 +36,7 @@ export const Controller = {
 
                 if (idX > -1) {
                     const { codigo, email, nivel } = usuarios[idX]
-                    const data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+                    const data_atualizacao = dataBR();
                     const token = sign(
                         { codigo, email, nivel },
                         JWT_KEY_SECRET,
@@ -66,15 +67,16 @@ export const Controller = {
         try {
             const { client, db } = await conexao();
             const form: ClassRegister = req.body;
-            const { email, senha } = form;
-
+            const senha = criptografarSenha(form.senha);
+            const email = form.email;
+            
             if (!validacao(form, ['email', 'senha'], res)) return;
 
             const resultado = await db.collection(COLLECTION.name).findOne({ $and: [{ email }, { senha }] });
 
             if (resultado?._id) {
                 const { codigo, email, nivel } = resultado;
-                const data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+                const data_atualizacao = dataBR();
                 const token = sign(
                     { codigo, email, nivel },
                     JWT_KEY_SECRET,
@@ -101,7 +103,7 @@ export const Controller = {
             const token = getToken(req);
 
             if (token) {
-                const data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+                const data_atualizacao = dataBR();
                 const resultado_aplicacao = await db.collection(COLLECTION.name).findOneAndUpdate(
                     { token },
                     { $set: { token: '', data_atualizacao } }
@@ -124,7 +126,7 @@ export const Controller = {
             const codigoUser = req.params.codigoUser;
 
             if (token) {
-                const data_atualizacao = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+                const data_atualizacao = dataBR();
                 const resultado_usuario = await db.collection(COLLECTION.name).updateOne(
                     { 'usuarios.codigo': codigoUser },
                     {
