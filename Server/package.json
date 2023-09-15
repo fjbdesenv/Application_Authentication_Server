@@ -1,0 +1,48 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Servidor de autentificarão de usuários de aplicações.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "start:dev": "nodemon",
+    "build": "npx tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fjbdesenv/Application_Authentication_Server.git"
+  },
+  "keywords": [
+    "Application",
+    "Authentication",
+    "Server"
+  ],
+  "author": "Fábio Júnior Barbosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fjbdesenv/Application_Authentication_Server/issues"
+  },
+  "homepage": "https://github.com/fjbdesenv/Application_Authentication_Server#readme",
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/helmet": "^4.0.0",
+    "@types/mongodb": "^4.0.7",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^20.5.0",
+    "@types/nodemon": "^1.19.2",
+    "@types/typescript": "^2.0.0",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.1",
+    "mongodb": "^5.8.0",
+    "morgan": "^1.10.0"
+  }
+}
