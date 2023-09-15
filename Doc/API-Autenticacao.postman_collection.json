@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "d1fed622-032f-4d6d-8576-02914f6a1817",
+		"name": "API-Autenticacao",
+		"description": "Api para autenticação de usuários.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15865657"
+	},
+	"item": [
+		{
+			"name": "Autenticacao",
+			"item": [
+				{
+					"name": "AuthUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"usuario6@teste.com.br\",\r\n    \"senha\": \"user6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_AUTH_APP}}/1/usuario",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_AUTH_APP}}"
+							],
+							"path": [
+								"1",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthAplicacao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"app1@app.com\",\r\n    \"senha\": \"app1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_AUTH_APP}}",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_AUTH_APP}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogoutAplicacao",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_LOGOUT_APP}}",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_LOGOUT_APP}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogoutUsuario",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_LOGOUT_USER}}/6",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_LOGOUT_USER}}"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Rotas de autenticação / Logout."
+		},
+		{
+			"name": "Aplicacao",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/2",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Aplicacao 2 (comum)\",\r\n    \"email\": \"app2@app.com\",\r\n    \"senha\": \"app2\",\r\n    \"nivel\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Aplicacao 1\",\r\n    \"email\": \"app6@app.com\",\r\n    \"senha\": \"app6\",\r\n    \"nivel\": {\r\n        \"descricao\": \"Administrador\",\r\n        \"valor\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/6",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Aplicação 1 (ADM)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/1",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/2",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Rotas para CRUP de aplicações (apenas apliacões ADM podem acessar).\n\n- Necessário autenticação de _Bearer token_."
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/2{{URL_USUARIO}}",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"2{{URL_USUARIO}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/1{{URL_USUARIO}}/1",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"1{{URL_USUARIO}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Usuario 4 (comum)\",\r\n    \"email\": \"usuario4@user.com.br\",\r\n    \"senha\": \"user4\",\r\n    \"nivel\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/2{{URL_USUARIO}}",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"2{{URL_USUARIO}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Usuario 6\",\r\n    \"email\": \"usuario6@teste.com.br\",\r\n    \"senha\": \"user6\",\r\n    \"nivel\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/1{{URL_USUARIO}}/6",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"1{{URL_USUARIO}}",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Usuario 1 (ADM)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/1{{URL_USUARIO}}/1",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"1{{URL_USUARIO}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}/3{{URL_USUARIO}}/5",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_APLICACAO}}"
+							],
+							"path": [
+								"3{{URL_USUARIO}}",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Rotas para CRUP de usuários.\n\n- Necessário autenticação de _Bearer token_."
+		},
+		{
+			"name": "Nivel",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AppGetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}/aplicacoes",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}"
+							],
+							"path": [
+								"aplicacoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserGetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}/usuarios",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}/13",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}"
+							],
+							"path": [
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\": 2,\r\n    \"valor\": 2,\r\n    \"descricao\": \"Comum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\": 1,\r\n    \"valor\": 2,\r\n    \"descricao\": \"Comum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}/3",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\": \"Usuário\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}/11",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}"
+							],
+							"path": [
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}/13",
+							"host": [
+								"{{SERVER}}{{BASE_URL}}{{VERSAO}}{{URL_NIVEL}}"
+							],
+							"path": [
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Rotas para CRUP de nivel (apenas apliacões ADM podem acessar).\n\n- Necessário autenticação de _Bearer token_.\n    \n- Os níveis de usuários podem ser consultados por qualquer aplicação."
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2RpZ28iOiIyIiwiZW1haWwiOiJhcHAyQGFwcC5jb20iLCJuaXZlbCI6MiwiaWF0IjoxNjk0Nzc1ODYxLCJleHAiOjE2OTczNjc4NjF9.XahgSaZLaMzV0Dm0jRV3m0Rsa_-bL6hM8CNB8-r63a0",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.addHeader({ key: 'X-app-key', value:'JENEBHE56W4WFWGEBYEWU3N3' });"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
